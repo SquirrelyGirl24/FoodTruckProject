@@ -7,11 +7,11 @@ public class FoodTruckApp {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		FoodTruckApp foodTruckApp = new FoodTruckApp();
-		
+
 		foodTruckApp.launchApp(input, foodTruckApp);
-		
+
 		input.close();
-		
+
 	}
 
 	private void launchApp(Scanner input, FoodTruckApp foodTruckApp) {
@@ -23,51 +23,33 @@ public class FoodTruckApp {
 			foodTruckApp.printMenu();
 			runMenu1 = foodTruckApp.chooseFromMenu(input, trucks);
 		}
-		
+
 	}
 
 	private FoodTruck[] inputTruck(Scanner input) {
 		System.out.println("You can enter up to 5 different food trucks to rate.");
-		System.out.println("Enter the name of the truck: ");
-		FoodTruck foodTruck = new FoodTruck();
-		String inputTruck = input.nextLine();
-		String truckName = input.nextLine();
-		foodTruck.setTruckName(truckName); 
-				if (truckName.equalsIgnoreCase("N")) {
-					FoodTruck[] quitArr = new FoodTruck[5]; 
-					return quitArr; 
-//					make an array
-				}
-				else {
-					System.out.println("Enter the type of food they serve: ");
-					String foodType = input.nextLine();
-					foodTruck.setFoodType(foodType);
-					
-					do {
-						System.out.println("Enter a rating of 1-5 for this food truck: ");
-						double rating = input.nextDouble();
-						foodTruck.setRating(rating);
-						if (rating > 5 || rating < 0) {
-							System.out.println("Invalid rating. Please try again.");
-						}
-						else {
-							foodTruck.setRating(rating);
-						System.out.println("Do you have another food truck to rate? Y or N");
-						if (inputTruck.equalsIgnoreCase("Y")) {
-							System.out.println("Enter the name of the truck: ");
-							foodTruck.setTruckName(truckName); 
-//							 what goes here?????? enter the name of the new truck 	
-						}
-//						else {
-						} while (inputTruck != "N") 
-// *** input ends if N is selected, take this as quit and end the program continues
-//						}
-						
-//					}
-					
-		return null;
+		System.out.println("When you are done naming trucks, enter \"quit\" for the truck name.");
+
+		FoodTruck[] truckArr = new FoodTruck[5];
+
+		for (int i = 0; i < truckArr.length; i++) {
+			FoodTruck foodTruck = new FoodTruck();
+			System.out.println("Enter the name of the truck: ");
+			String truckName = input.nextLine();
+			if (truckName.equalsIgnoreCase("quit")) {
+				break;
+			}
+			foodTruck.setTruckName(truckName);
+			System.out.println("Enter the type of food they serve: ");
+			foodTruck.setFoodType(input.nextLine());
+			System.out.println("Enter a rating of 1-5 for this food truck: ");
+			foodTruck.setRating(input.nextDouble());
+			truckArr[i] = foodTruck;
+		}
+
+		return truckArr;
 	}
-	
+
 	private void printMenu() {
 		System.out.println("** Please choose one of the following: **");
 		System.out.println("1. List all existing food trucks.");
@@ -81,20 +63,20 @@ public class FoodTruckApp {
 		do {
 			System.out.println("Enter your selection 1-4: ");
 			choice = input.nextInt();
-			
-			if (choice > 4 || < 1) {
+
+			if (choice > 4 || choice < 1) {
 				System.out.println("Invalid selection. Please try again.");
 			}
-		} while (choice < 4 || > 1);
-		
+		} while (choice < 4 || choice > 1);
+
 		switch (choice) {
-		case 1;
+		case 1:
 			displayTrucks(trucks);
 			break;
 		case 2:
 			seeAvgRating(trucks);
 			break;
-		case 3: 
+		case 3:
 			seeHighRating(trucks);
 			break;
 		case 4:
@@ -102,16 +84,37 @@ public class FoodTruckApp {
 			break;
 		}
 		return false;
-// *** run this menu till the user chooses quit
-		
 	}
 
+	private void displayTrucks(FoodTruck[] trucks) {
+		System.out.println("All food trucks:");
+		for(int i = 0; i < trucks.length; i++) {
+			System.out.println(trucks[i].toString());
+		}
+	}
+	private void seeAvgRating(FoodTruck[] trucks) {
+		double sumRatings = 0;
+		for (int i = 0; i < trucks.length; i++) {
+			sumRatings+= trucks[i].getRating();
+		}
+		double avg = sumRatings / trucks.length * 1.0;
+		System.out.println("Average food truck rating: " + avg);
+	}
+	private void seeHighRating(FoodTruck[] trucks) {
+		double highRating = trucks[0].getRating();
+		for (int i = 0; i < trucks.length; i++);
+			if (trucks[i].getRating() > highRating) {
+				highRating = trucks[i].getRating();
+			}
+	}
+	int ties = 0;
+	for (int i = 0; i < trucks.length; i++) {
+		if (highRating == trucks[i].getRating()) {
+			
+		}
+	}
 
 	
-	
-	
-
 }
 
 // *** if <5 trucks were entered only display those entered, no null
-

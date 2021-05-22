@@ -17,9 +17,9 @@ public class FoodTruck {
 		this.truckID = truckID;
 	}
 
-	public FoodTruck(String truckName, String foodType, double rating, int truckID) {
-		this(truckName, foodType, rating, 0.0);
-	}
+//	public FoodTruck(String truckName, String foodType, double rating, int truckID) {
+//		this(truckName, foodType, rating, 0.0);
+//	}
 
 	public String getTruckName() {
 		return truckName;

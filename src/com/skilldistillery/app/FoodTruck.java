@@ -6,7 +6,7 @@ public class FoodTruck {
 	private double rating;
 	private int truckID;
 	static int nextTruckID = 1;
-	
+
 	public FoodTruck() {
 
 	}
@@ -50,5 +50,12 @@ public class FoodTruck {
 		this.truckID = truckID + nextTruckID;
 		nextTruckID++;
 	}
-	
+
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Food Truck Name: ").append(truckName).append(", Food Type: ").append(foodType)
+				.append(", Rating: ").append(rating).append(", and TruckID: ").append(truckID).append(".");
+		return builder.toString();
+	}
+
 }
